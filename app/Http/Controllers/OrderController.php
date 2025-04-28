@@ -74,9 +74,7 @@ class OrderController extends Controller
         if ($order->menu->merchant_id !== Auth::id()) {
             abort(403);  // Jika merchant tidak sesuai, tampilkan error 403
         }
-    
-
-    
+        
         // Update status
         $order->status = $request->status;
         $order->save();  // Simpan perubahan ke database

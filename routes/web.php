@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/merchant/orders', [OrderController::class, 'merchantOrders'])->name('orders.index.merchant');
     Route::get('/merchant/customers', [MerchantController::class, 'listCustomers'])->name('merchant.customers');
+    Route::post('/merchant/orders/{order}/confirm', [OrderController::class, 'confirm'])->name('merchant.orders.confirm');
     Route::post('/merchant/orders/{id}/confirm', [OrderController::class, 'confirm'])->name('orders.confirm');
     Route::post('/merchant/orders/{id}/update', [OrderController::class, 'updateStatus'])->name('merchant.orders.updateStatus');
 });
