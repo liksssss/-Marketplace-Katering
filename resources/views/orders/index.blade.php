@@ -1,25 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Pesanan Saya</h2>
+<div class="container py-4">
+    <h2 class="text-center mb-4">Pesanan Saya</h2>
 
-    @foreach ($orders as $order)
-        <div class="card mb-3">
-            <div class="card-body">
-                <p><strong>Menu:</strong> {{ $order->menu->name }}</p>
-                <p><strong>Jumlah:</strong> {{ $order->quantity }}</p>
-                <p><strong>Status Order:</strong> {{ ucfirst($order->status) }}</p>
-                <p><strong>Status Pembayaran:</strong> {{ ucfirst($order->payment_status) }}</p>
-
-                @if($order->payment_status == 'unpaid')
-                    <form action="{{ route('orders.pay', $order->id) }}" method="POST">
-                        @csrf
-                        <button class="btn btn-success">Bayar Sekarang</button>
-                    </form>
-                @endif
-            </div>
+    @if($orders->isEmpty())
+        <div class="alert alert-info text-center">
+            Kamu belum memiliki pesanan.
         </div>
-    @endforeach
+    @else
+        <div class="row">
+            @foreach ($orders as $order)
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $order->menu->name }}</h5>
+
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><strong>Jumlah:</strong> {{ $order->quantity }}</li>
+                                <li class="list-group-item">
+                                    <strong>Status Order:</strong> 
+                                    <span class="badge 
+                                        {{ $order->status == 'pending' ? 'bg-warning' : ($order->status == 'paid' ? 'bg-success' : 'bg-danger') }}">
+                                        {{ ucfirst($order->status) }}
+                                    </span>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Status Pembayaran:</strong> 
+                                    <span class="badge 
+                                        {{ $order->payment_status == 'unpaid' ? 'bg-danger' : 'bg-success' }}">
+                                        {{ ucfirst($order->payment_status) }}
+                                    </span>
+                                </li>
+                            </ul>
+
+                            @if($order->payment_status == 'unpaid')
+                                <form action="{{ route('orders.pay', $order->id) }}" method="POST" class="d-grid">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="bi bi-cash-coin"></i> Bayar Sekarang
+                                    </button>
+                                </form>
+                            @else
+                                <div class="alert alert-success p-2 text-center">
+                                    <i class="bi bi-check-circle-fill"></i> Sudah Dibayar
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
 </div>
 @endsection

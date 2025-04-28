@@ -20,12 +20,6 @@
                 <i class="bi bi-receipt me-2"></i> Lihat Pesanan Saya
             </a>
         </div>
-
-        <div class="text-end">
-            <a href="{{ route('logout') }}" class="btn btn-outline-danger btn-sm d-inline-flex align-items-center">
-                <i class="bi bi-box-arrow-right me-1"></i> Logout
-            </a>
-        </div>
     </div>
 </div>
 @endsection
