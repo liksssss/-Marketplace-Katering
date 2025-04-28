@@ -8,7 +8,7 @@
 
             <a href="{{ route('menu.index') }}" class="btn btn-primary mb-2"> Menu</a><br>
 
-            <a href="{{ route('orders.index.merchant') }}" class="btn btn-info mb-2">Lihat Pesanan Masuk</a><br>
+            <a href="{{ route('orders.index.customer') }}" class="btn btn-info mb-2">Lihat Pesanan Masuk</a><br>
 
         </div>
         <a href="{{ route('logout') }}">Logout</a>

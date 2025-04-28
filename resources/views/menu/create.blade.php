@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Tambah Menu</h2>
+<div class="container py-4">
+    <h2 class="text-center mb-4">Tambah Menu</h2>
 
-    <form action="{{ route('menu.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('menu.store') }}" method="POST" enctype="multipart/form-data" class="card p-4 shadow-sm">
         @csrf
 
         <div class="mb-3">
@@ -27,7 +27,9 @@
             <input type="file" name="image" class="form-control" accept="image/*">
         </div>
 
-        <button type="submit" class="btn btn-success">Simpan Menu</button>
+        <div class="text-end">
+            <button type="submit" class="btn btn-success">Simpan Menu</button>
+        </div>
     </form>
 </div>
 @endsection

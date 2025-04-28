@@ -31,12 +31,13 @@ class InvoiceController extends Controller
     public function show($id)
     {
         $invoice = Invoice::with('order.menu')->findOrFail($id);
-
-
+    
+        // Cek apakah invoice milik customer atau merchant yang sesuai
         if ($invoice->order->user_id !== Auth::id() && $invoice->order->menu->merchant_id !== Auth::id()) {
             abort(403);
         }
-
+    
         return view('invoices.show', compact('invoice'));
     }
+    
 }

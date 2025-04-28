@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2>Edit Menu</h2>
+<div class="container py-4">
+    <h2 class="text-center mb-4">Edit Menu</h2>
 
-    <form action="{{ route('menu.update', $menu->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('menu.update', $menu->id) }}" method="POST" enctype="multipart/form-data" class="card p-4 shadow-sm">
         @csrf
         @method('PUT')
 
@@ -26,12 +26,14 @@
         <div class="mb-3">
             <label for="image" class="form-label">Ganti Gambar (opsional)</label><br>
             @if ($menu->image)
-                <img src="{{ asset('storage/' . $menu->image) }}" width="150" class="mb-2"><br>
+                <img src="{{ asset('storage/' . $menu->image) }}" width="150" class="mb-3 rounded shadow"><br>
             @endif
             <input type="file" name="image" class="form-control" accept="image/*">
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Menu</button>
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary">Update Menu</button>
+        </div>
     </form>
 </div>
 @endsection

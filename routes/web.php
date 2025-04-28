@@ -9,6 +9,9 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MerchantController;
 use Illuminate\Support\Facades\Auth;
 
+Route::get('/', function () {
+    return redirect('/login');
+});
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -20,6 +23,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/merchant/customers', [DashboardController::class, 'showCustomers'])->name('merchant.customers');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -35,8 +39,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/merchant/orders', [OrderController::class, 'merchantOrders'])->name('orders.index.merchant');
+    Route::get('/merchant/customers', [MerchantController::class, 'listCustomers'])->name('merchant.customers');
     Route::post('/merchant/orders/{id}/confirm', [OrderController::class, 'confirm'])->name('orders.confirm');
+    Route::post('/merchant/orders/{id}/update', [OrderController::class, 'updateStatus'])->name('merchant.orders.updateStatus');
 });
+
 
 Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
 Route::post('/invoices/{order_id}', [InvoiceController::class, 'store'])->name('invoices.store');
@@ -46,5 +53,6 @@ Route::post('/orders/{id}/pay', [OrderController::class, 'pay'])->name('orders.p
 Route::middleware(['auth'])->group(function () {
     Route::get('/merchant/customers', [MerchantController::class, 'listCustomers'])->name('merchant.customers');
 });
+
 
 

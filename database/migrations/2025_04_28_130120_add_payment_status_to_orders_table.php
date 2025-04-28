@@ -12,17 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            //
+            $table->enum('payment_status', ['unpaid', 'waiting', 'paid'])->default('unpaid')->after('status');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->enum('payment_status', ['unpaid', 'waiting', 'paid'])->default('unpaid');
+            $table->dropColumn('payment_status');
         });
     }
+    
 };

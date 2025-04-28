@@ -12,10 +12,17 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $menus = Menu::where('merchant_id', Auth::id())->get();
+        if (Auth::user()->role === 'merchant') {
+            // Jika yang login Merchant, tampilkan menu miliknya sendiri
+            $menus = Menu::where('merchant_id', Auth::id())->get();
+        } else {
+            // Jika yang login Customer, tampilkan semua menu dari semua merchant
+            $menus = Menu::all();
+        }
+    
         return view('menu.index', compact('menus'));
     }
-
+    
     public function create()
     {
         return view('menu.create');
