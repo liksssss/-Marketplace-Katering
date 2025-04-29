@@ -99,4 +99,10 @@ class MenuController extends Controller
 
         return redirect()->route('menu.index')->with('success', 'Menu berhasil dihapus!');
     }
+
+    public function show($id)
+    {
+        $menu = Menu::with('merchant')->findOrFail($id);
+        return view('menu.show', compact('menu'));
+    }
 }

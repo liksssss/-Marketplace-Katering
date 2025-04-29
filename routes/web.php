@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -55,9 +56,9 @@ Route::post('/invoices/{order_id}', [InvoiceController::class, 'store'])->name('
 
 Route::post('/orders/{id}/pay', [OrderController::class, 'pay'])->name('orders.pay');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/merchant/customers', [MerchantController::class, 'listCustomers'])->name('merchant.customers');
-});
+Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::get('/menu/{id}', [MenuController::class, 'show'])->name('menu.show');
+
 
 
 
