@@ -49,15 +49,15 @@ class OrderController extends Controller
         return redirect()->route('menu.show', $menu->id)->with('success', 'Pesanan berhasil dibuat!');
     }
     
-    
-
-    // Merchant: Lihat semua pesanan ke merchant ini
     public function merchantOrders()
     {
         $orders = Order::whereHas('menu', function ($query) {
             $query->where('merchant_id', Auth::id());
-        })->with('menu', 'user')->get();
-
+        })
+        ->with('menu', 'user')
+        ->orderBy('created_at', 'desc') // Tambahkan ini
+        ->get();
+    
         return view('orders.merchant_index', compact('orders'));
     }
 

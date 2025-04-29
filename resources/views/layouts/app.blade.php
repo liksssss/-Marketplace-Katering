@@ -6,6 +6,55 @@
     <title>Marketplace Katering</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Styling for modern footer */
+        .footer {
+            background-color: #007bff; /* Primary color */
+            color: #ffffff;
+            padding: 40px 0;
+        }
+
+        .footer .footer-logo a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer .social-icons a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .footer .social-icons a:hover {
+            color: #f8f9fa;
+        }
+
+        .footer .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .footer .footer-links a:hover {
+            color: #f8f9fa;
+        }
+
+        .footer .footer-bottom {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        .footer .divider {
+            border-top: 1px solid #f8f9fa;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -32,6 +81,15 @@
                             <span class="nav-link text-primary fw-semibold">
                                 👋 Hi, {{ Auth::user()->name }}
                             </span>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}" class="btn btn-outline-danger rounded-pill" 
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="bi bi-box-arrow-right me-1"></i> Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </li>
                     @endauth
 
@@ -66,25 +124,50 @@
     
 
     <!-- Footer -->
-    <footer class="bg-primary text-light mt-auto">
-        <div class="container py-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <div class="mb-3 mb-md-0 text-center text-md-start">
-                <p class="mb-0">&copy; {{ date('Y') }} <a href="/" class="text-light text-decoration-none fw-bold">Marketplace Katering</a></p>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-start mb-4 mb-md-0">
+                    <div class="footer-logo">
+                        <a href="/">🍽️ Katering</a>
+                    </div>
+                    <p class="mt-3">Menyediakan layanan katering terbaik untuk Anda.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="footer-links">
+                        <a href="#">Tentang Kami</a>
+                        <a href="#">Layanan</a>
+                        <a href="#">Kontak</a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="social-icons">
+                        <a href="#" title="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" title="Twitter">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" title="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="mailto:info@example.com" title="Email">
+                            <i class="bi bi-envelope"></i>
+                        </a>
+                        <a href="https://www.google.com/maps/place/Example+Address" title="Lokasi">
+                            <i class="bi bi-geo-alt"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="d-flex gap-3 justify-content-center">
-                <a href="#" class="text-light fs-5" title="Facebook">
-                    <i class="bi bi-facebook"></i>
-                </a>
-                <a href="#" class="text-light fs-5" title="Twitter">
-                    <i class="bi bi-twitter-x"></i>
-                </a>
-                <a href="#" class="text-light fs-5" title="Instagram">
-                    <i class="bi bi-instagram"></i>
-                </a>
+
+            <div class="divider"></div>
+
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; {{ date('Y') }} <a href="/" class="text-light text-decoration-none fw-bold">Marketplace Katering</a>. Semua hak dilindungi.</p>
             </div>
         </div>
     </footer>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

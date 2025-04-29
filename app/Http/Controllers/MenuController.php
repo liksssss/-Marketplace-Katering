@@ -37,18 +37,14 @@ class MenuController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $imagePath = null;
+        $data = $request->only('name', 'description', 'price');
+        $data['merchant_id'] = Auth::id();
+
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('menu_images', 'public');
+            $data['image'] = $request->file('image')->store('menu_images', 'public');
         }
 
-        Menu::create([
-            'merchant_id' => Auth::id(),
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'image' => $imagePath,
-        ]);
+        Menu::create($data);
 
         return redirect()->route('menu.index')->with('success', 'Menu berhasil ditambahkan!');
     }
