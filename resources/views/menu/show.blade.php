@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container py-5">
+    <div class="container py-5">
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-primary"><i class="bi bi-info-circle me-2"></i> Detail Menu</h2>
         <a href="{{ route('dashboard') }}" class="btn btn-outline-secondary">

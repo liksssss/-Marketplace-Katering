@@ -29,26 +29,26 @@ class OrderController extends Controller
         ]);
     
         $menu = Menu::findOrFail($request->menu_id);
-        $totalPrice = $menu->price * $request->quantity; // Menghitung total_price berdasarkan quantity dan harga menu
+        $totalPrice = $menu->price * $request->quantity;
     
         $order = Order::create([
             'user_id' => Auth::id(),
             'menu_id' => $menu->id,
             'quantity' => $request->quantity,
             'status' => 'pending',
-            'payment_status' => 'unpaid', // Default unpaid
+            'payment_status' => 'unpaid',
         ]);
     
-        // Menyimpan invoice dengan total_price
         Invoice::create([
             'order_id' => $order->id,
             'invoice_number' => 'INV-' . time() . '-' . $order->id,
-            'total_price' => $totalPrice,  // Menambahkan total_price
-            'status' => 'unpaid', // Default status invoice
+            'total_price' => $totalPrice,
+            'status' => 'unpaid',
         ]);
     
-        return redirect()->back()->with('success', 'Pesanan berhasil dibuat!');
+        return redirect()->route('menu.show', $menu->id)->with('success', 'Pesanan berhasil dibuat!');
     }
+    
     
 
     // Merchant: Lihat semua pesanan ke merchant ini

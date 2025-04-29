@@ -47,17 +47,23 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="flex-grow-1 pt-5 mt-4">
         <div class="container py-4">
-            <form action="{{ route('search') }}" method="GET" class="d-flex">
-                <input type="text" name="query" class="form-control me-2" placeholder="Cari menu katering..." required>
-                <button type="submit" class="btn btn-primary">Cari</button>
-            </form>
-            
+            <div class="row justify-content-center mb-4">
+                @if (Route::currentRouteName() === 'dashboard')
+                <div class="col-md-8">
+                    <form action="{{ route('search') }}" method="GET" class="d-flex bg-white p-3 rounded shadow-sm">
+                        <input type="text" name="query" class="form-control me-2" placeholder="Cari menu katering..." required>
+                        <button type="submit" class="btn btn-primary">Cari</button>
+                    </form>
+                </div>
+                @endif
+            </div>
+    
             @yield('content')
         </div>
     </main>
+    
 
     <!-- Footer -->
     <footer class="bg-primary text-light mt-auto">
